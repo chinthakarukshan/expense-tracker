@@ -5,7 +5,7 @@ import './ExpenseForm.css';
 const ExpenseForm = () => {
 
     const [enteredTitle, setEnteredTitle] = useState('');
-    const [enteredAmout, setEnteredAmount] = useState('');
+    const [enteredAmount, setEnteredAmount] = useState('');
     const [enteredDate, setEnteredDate] = useState('');
     // const [userInput, setUserInput] = useState({
     //     enteredTitle: '',
@@ -46,8 +46,20 @@ const ExpenseForm = () => {
         // });
     };
 
+    const submitHandler = (event) => {
+        event.preventDefault(); //Prevent the request is being sent to the server once the form is submitted.
+
+        const expenseData = {
+            title : enteredTitle,
+            amount : enteredAmount,
+            date : new Date(enteredDate)
+        };
+
+        console.log(expenseData);
+    };
+
     return (
-        <form className>
+        <form onSubmit = {submitHandler}>
             <div className='new-expense__controls'>
                 <div className='new-expense__control'>
                     <label>Title</label>
