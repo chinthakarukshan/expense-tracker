@@ -10,15 +10,20 @@ const Expenses = (props) => {
     const [filteredYear, setFilteredYear] = useState('2020');
     const expenses = props.expenses;
 
+    const filteredExpenses = expenses.filter((currentExpense) => {
+        const year = currentExpense.date.getFullYear().toString();
+        return year===filteredYear;
+    });
+
     const changeDropDownValue = (selectedYear) => {
         setFilteredYear(selectedYear);
-      };
+    };
 
     return (
         <div>
             <Card className='expenses'>
                 <ExpensesFilter selectedYear={filteredYear} onChangeDropdown={changeDropDownValue}/>
-                {expenses.map(expense => <ExpenseItem key={expense.id} title={expense.title} amount={expense.amount} date={expense.date}/>)}
+                {filteredExpenses.map(expense => <ExpenseItem key={expense.id} title={expense.title} amount={expense.amount} date={expense.date}/>)}
             </Card>
         </div>
     );
